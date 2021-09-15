@@ -1,8 +1,19 @@
 {
   "manifest_version": 2,
-
   "name": "Task Tracker",
   "description": "idk what to put here",
   "version": "1.0.0",
-
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "browser_action": {
+    "default_icon": {
+    },
+    "default_title": "Task Tracker",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "notifications"
+  ]
 }
