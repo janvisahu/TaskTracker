@@ -1,16 +1,23 @@
 <html>
     <head>
         <h1>Your present deadlines</h1>
-        <textarea rows="4" cols="50" placeholder="Enter your task and deadline."
-         style="font-family:Verdana, Geneva, Tahoma, sans-serif;color:#650ef0; border: groove palevioletred;">
-            </textarea> <br>
-            <textarea rows="4" cols="50" placeholder="Enter your task and deadline."
-         style="font-family:Verdana, Geneva, Tahoma, sans-serif;color:#650ef0; border: groove palevioletred;">
-            </textarea><br>
-            <textarea rows="4" cols="50" placeholder="Enter your task and deadline."
-         style="font-family:Verdana, Geneva, Tahoma, sans-serif;color:#650ef0; border: groove palevioletred;">
-            </textarea>
-            <br>
+        <div id="dynamicCheck">
+            <input type="button" value="Create task" onclick="createNewElement();"/>
+         </div>
+         <script type="text/JavaScript">
+function createNewElement() {
+    // First create a DIV element.
+	var txtNewInputBox = document.createElement('div');
+
+    // Then add the content (a new input box) of the element.
+	txtNewInputBox.innerHTML = "<input type='text' id='newInputBox'>";
+
+    // Finally put it where it is supposed to appear.
+	document.getElementById("newElementId").appendChild(txtNewInputBox);
+}
+</script>
+         <div id="newElementId">New inputbox goes here:</div>
+       
             
 
     </head>
