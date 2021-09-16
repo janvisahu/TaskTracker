@@ -3,23 +3,24 @@
         <h1>Your present deadlines</h1>
         <div id="dynamicCheck">
             <input type="button" value="Create task" onclick="createNewElement();"/>
+            
          </div>
+        
          <script type="text/JavaScript">
 function createNewElement() {
     // First create a DIV element.
+    
 	var txtNewInputBox = document.createElement('div');
 
     // Then add the content (a new input box) of the element.
-	txtNewInputBox.innerHTML = "<input type='text' id='newInputBox'>";
+	txtNewInputBox.innerHTML = "<input type='text' id='newInputBox' style='font-size: 20px;' size='30' >";
 
     // Finally put it where it is supposed to appear.
 	document.getElementById("newElementId").appendChild(txtNewInputBox);
 }
 </script>
-         <div id="newElementId">New inputbox goes here:</div>
-       
-            
-
+         <div id="newElementId">Click on create task to add a task</div>  
+         
     </head>
 
 </html>
