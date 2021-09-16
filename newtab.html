@@ -1,9 +1,10 @@
 <html>
     <head>
-        <h1>Your present deadlines</h1>
-        <div id="dynamicCheck">
-            <input type="button" value="Create task" onclick="createNewElement();"/>
-            
+        <body>
+        <h1 style="text-align: center;"> Your present deadlines</h1>
+        <div id="dynamicCheck" style="text-align: center;">
+            <input type="button" value="Create task" style="margin-bottom: 10px ;" onclick="createNewElement() ; "/>
+            <br>
          </div>
         
          <script type="text/JavaScript">
@@ -19,8 +20,13 @@ function createNewElement() {
 	document.getElementById("newElementId").appendChild(txtNewInputBox);
 }
 </script>
-         <div id="newElementId">Click on create task to add a task</div>  
-         
+         <div id="newElementId" style="text-align: center;">Click on create task to add a task</div>  
+         <style>
+             #newInputBox
+                {margin-bottom:10px;
+             }
+         </style>
+         </body>
     </head>
 
 </html>
