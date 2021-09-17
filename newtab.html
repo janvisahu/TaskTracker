@@ -14,17 +14,23 @@ function createNewElement() {
 	var txtNewInputBox = document.createElement('div');
 
     // Then add the content (a new input box) of the element.
-	txtNewInputBox.innerHTML = "<input type='text' id='newInputBox' style='font-size: 20px;' size='30' >";
+	txtNewInputBox.innerHTML = "<input type='text' id='newInputBox' style='font-size: 20px; ' size='30' >";
 
     // Finally put it where it is supposed to appear.
 	document.getElementById("newElementId").appendChild(txtNewInputBox);
+    //add delete button
+	var btn = document.createElement("button");
+     btn.innerHTML = "delete task";
+     document.getElementById("newElementId").appendChild(btn);
+
 }
 </script>
          <div id="newElementId" style="text-align: center;">Click on create task to add a task</div>  
          <style>
              #newInputBox
-                {margin-bottom:10px;
+                {margin:10px;
              }
+             
          </style>
          </body>
     </head>
