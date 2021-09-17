@@ -31,7 +31,7 @@
                     var params = window.location.search.split('?');
                     for (var i = 0; i < params.length-1; i++) {
                         var key = i                        
-                        var value = decodeURIComponent(params[i].split('=')[i+1]);
+                        var value = decodeURIComponent(params[i].split('=')[i]);
                         queryString[key] = value;
                         var data = queryString[i] + window.location.search;
                         var task = "#lblTask"+i
