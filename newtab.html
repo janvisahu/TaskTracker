@@ -1,38 +1,57 @@
-<html>
-    <head>
-        <body>
-        <h1 style="text-align: center;"> Your present deadlines</h1>
-        <div id="dynamicCheck" style="text-align: center;">
-            <input type="button" value="Create task" style="margin-bottom: 10px ;" onclick="createNewElement() ; "/>
-            <br>
-         </div>
-        
-         <script type="text/JavaScript">
-function createNewElement() {
-    // First create a DIV element.
-    
-	var txtNewInputBox = document.createElement('div');
-
-    // Then add the content (a new input box) of the element.
-	txtNewInputBox.innerHTML = "<input type='text' id='newInputBox' style='font-size: 20px; ' size='30' >";
-
-    // Finally put it where it is supposed to appear.
-	document.getElementById("newElementId").appendChild(txtNewInputBox);
-    //add delete button
-	var btn = document.createElement("button");
-     btn.innerHTML = "delete task";
-     document.getElementById("newElementId").appendChild(btn);
-
-}
-</script>
-         <div id="newElementId" style="text-align: center;">Click on create task to add a task</div>  
-         <style>
-             #newInputBox
-                {margin:10px;
-             }
-             
-         </style>
-         </body>
-    </head>
-
-</html>
+<html lang="en">  
+<head>  
+  <title> Example of Add More Field using the Bootstrap and Jquery </title>  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">  
+</head>  
+<body>  
+  
+<div class="container">  
+  <div class="panel panel-default">  
+    <div class="panel-heading"> Add tasks and deadlines </div>  
+    <div class="panel-body">  
+  
+        <form action="action.php" >  
+  
+        <div class="input-group control-group after-add-more">  
+          <input type="text" name="addmore[]" class="form-control" placeholder="Enter Task Here">  
+          <div class="input-group-btn">   
+            <button class="btn btn-success add-more" type="button"><i class="glyphicon glyphicon-plus"></i> Add</button>  
+          </div>  
+        </div>  
+  
+        </form>  
+  
+        <!-- Copy Fields -->  
+        <div class="copy hide">  
+          <div class="control-group input-group" style="margin-top:10px">  
+            <input type="text" name="addmore[]" class="form-control" placeholder="Enter Task Here">  
+            <div class="input-group-btn">   
+              <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
+            </div>  
+          </div>  
+        </div>  
+  
+    </div>  
+  </div>  
+</div>  
+  
+<script type="text/javascript">  
+  
+    $(document).ready(function() {  
+  
+      $(".add-more").click(function(){   
+          var html = $(".copy").html();  
+          $(".after-add-more").after(html);  
+      });  
+  
+      $("body").on("click",".remove",function(){   
+          $(this).parents(".control-group").remove();  
+      });  
+  
+    });  
+  
+</script>  
+  
+</body>  
+</html>  
