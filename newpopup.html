@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>View Tasks Popup</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="pannel pannel-default">
+            <div class="panel-heading"> View tasks and deadlines </div>
+            <div class="panel-body">
+                <label type="text" name="addmore[]" class="form-control">
+                    <span id="lblTask0"></span>
+                </label>
+                <label type="text" name="addmore[]" class="form-control">
+                    <span id="lblTask1"></span>
+                </label>
+                <label type="text" name="addmore[]" class="form-control">
+                    <span id="lblTask2"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var queryString = new Array();
+        $(function () {
+            if (queryString.length == 0) {
+                if (window.location.search.split('?').length > 1) {
+                    var params = window.location.search.split('?');
+                    for (var i = 0; i < params.length-1; i++) {
+                        var key = i                        
+                        var value = decodeURIComponent(params[i].split('=')[i+1]);
+                        queryString[key] = value;
+                        var data = queryString[i] + window.location.search;
+                        var task = "#lblTask"+i
+                        $(task).html(data);
+                    }
+                }
+            }
+            for (var i = 0; i<3 ; i++) {
+                if (queryString[i] != null) {
+                    
+                }
+            }
+            
+        });
+    </script>
+
+</body>
+</html>

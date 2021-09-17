@@ -10,7 +10,7 @@
     "default_icon": {
     },
     "default_title": "Task Tracker",
-    "default_popup": "popup.html"
+    "default_popup": "newpopup.html"
   },
   "permissions": [
     "storage",
