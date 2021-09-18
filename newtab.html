@@ -15,6 +15,7 @@
 
                     <div class="input-group control-group after-add-more">
                         <input type="text" id="taskText" name="addmore[]" class="form-control" placeholder="Enter Task Here">
+                        <input type="date" id="deadline" name="deadline" max='09-09-2021'>
                         <div class="input-group-btn">
                             <button class="btn btn-success add-more" type="button" id="btnSendQuery"><i class="glyphicon glyphicon-plus"></i> Add</button>
                         </div>
@@ -25,7 +26,8 @@
                 <!-- Copy Fields -->
                 <div class="copy hide">
                     <div class="control-group input-group" style="margin-top:10px">
-                        <input type="text" id="taskText2" name="addmore[]" class="form-control" placeholder="Enter Task Here">
+                        <input type="text" name="addmore[]" class="form-control" placeholder="Enter Task Here">
+                        <input type="date" name="deadline">
                         <div class="input-group-btn">
                             <button class="btn btn-danger remove" type="button" id="btnRemoveQuery"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                         </div>
@@ -47,13 +49,15 @@
         var count = 0;
         var url = "newpopup.html";
 
+        
+
         $(document).ready(function () {
 
             $(".add-more").click(function () {
                 var html = $(".copy").html();
                 $(".after-add-more").after(html);
                 count = count + 1;
-                url = url + "?" + count + "=" + encodeURIComponent($("#taskText").val());
+                url = url + "?" + count + "=" + encodeURIComponent($("#taskText2").val());
             });
 
             $("body").on("click", ".remove", function () {
@@ -62,6 +66,24 @@
             });
             $("#btnSeePopup").bind("click", function () {
                 window.location.href = url;
+            });
+
+            $("#deadline").click(function () {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var yyyy = today.getFullYear();
+
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+
+                today = dd + '-' + mm + '-' + yyyy;
+                document.getElementById("deadline").setAttribute("min", today);
             });
         });
 
