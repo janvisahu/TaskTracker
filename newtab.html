@@ -8,14 +8,15 @@
 
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading"> Add tasks and Deadlines </div>
+            <div class="panel-heading"> Add Tasks and Deadlines </div>
             <div class="panel-body">
 
                 <form action="action.php">
 
                     <div class="input-group control-group after-add-more">
-                        <input type="text" id="taskText" name="addmore[]" class="form-control" placeholder="Enter Task Here">
-                        <input type="date" id="deadline" name="deadline" min='2021-09-09'>
+                        <input type="text" id="taskText" name="addTask" class="form-control" placeholder="Enter Task Here">
+                        <input type="date" id="dateText" name="deadline" min='2021-09-09'>
+                        <input type="time" id="timeText" name="deadlineTime">
                         <div class="input-group-btn">
                             <button class="btn btn-success add-more" type="button" id="btnSendQuery"><i class="glyphicon glyphicon-plus"></i> Add</button>
                         </div>
@@ -26,8 +27,8 @@
                 <!-- Copy Fields -->
                 <div class="copy hide">
                     <div class="control-group input-group" style="margin-top:10px">
-                        <input type="text" name="addmore[]" class="form-control" placeholder="Enter Task Here">
-                        <input type="date" name="deadline" min='2021-09-09'>
+                        <input type="text" name="addmore[]" id="taskInfo" class="form-control" placeholder="Enter Task Here">
+                        
                         <div class="input-group-btn">
                             <button class="btn btn-danger remove" type="button" id="btnRemoveQuery"><i class="glyphicon glyphicon-remove"></i> Remove</button>
                         </div>
@@ -54,10 +55,18 @@
         $(document).ready(function () {
 
             $(".add-more").click(function () {
-                var html = $(".copy").html();
+                var text = $("[name='addTask']").val() + " " + $("#dateText").val() + " " + $("#timeText").val();
+                
+                var html = $(".copy").html();                
                 $(".after-add-more").after(html);
+
+                document.getElementById("taskInfo").value = text;
+                document.getElementById("taskText").value = "";
+                document.getElementById("dateText").value = "";
+                document.getElementById("timeText").value = "";
+
                 count = count + 1;
-                url = url + "?" + count + "=" + encodeURIComponent($("[name='addmore[]']").val());
+                url = url + "?" + count + "=" + text;
             });
 
             $("body").on("click", ".remove", function () {
@@ -68,7 +77,7 @@
                 window.location.href = url;
             });
 
-            $("[name='deadline']").click(function () {
+            $("#dateText").click(function () {
                 var today = new Date();
                 var dd = today.getDate();
                 var mm = today.getMonth() + 1; //January is 0!
@@ -83,7 +92,7 @@
                 }
 
                 today = yyyy + '-' + mm + '-' + dd;
-                document.getElementById("deadline").setAttribute("min", today);
+                document.getElementById("dateText").setAttribute("min", today);
             });
         });
 

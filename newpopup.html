@@ -29,11 +29,10 @@
             if (queryString.length == 0) {
                 if (window.location.search.split('?').length > 1) {
                     var params = window.location.search.split('?');
-                    for (var i = 0; i < params.length-1; i++) {
-                        var key = i                        
+                    for (var i = 0; i < params.length-1; i++) {                    
                         var value = decodeURIComponent(params[i].split('=')[i]);
                         queryString[key] = value;
-                        var data = queryString[i] + window.location.search;
+                        var data = "->" + value;
                         var task = "#lblTask"+i
                         $(task).html(data);
                     }
