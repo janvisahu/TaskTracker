@@ -1,0 +1,173 @@
+<html lang="en">
+<head>
+    <title>Task Manager extension </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+        table, th, td {            
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+        .btn {
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Add Tasks and Deadlines </div>
+            <div class="panel-body">
+
+                <form action="action.php">
+                    <div class="input-group control-group after-add-more">
+                        <input type="text" id="taskText" name="addTask" class="form-control" placeholder="Enter Task Here">
+                        <input type="date" id="dateText" name="deadline" min='2021-09-09'>
+                        <input type="time" id="timeText" name="deadlineTime">
+                        <div class="input-group-btn">
+                            <button class="btn btn-success add-more" type="button" id="btnSendQuery"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="input-group control-group after-add-more">
+
+                    <table id="taskTable" style="width: 100%; white-space: nowrap; table-layout: fixed;">
+                        <tr>
+                            <th style="width: 50%"></th>
+                            <th style="width: 15%"></th>
+                            <th style="width: 15%"></th>
+                            <th style="width: 10%"></th>
+                            <th style="width: 10%"></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="control-group input-group" style="margin-top: 10px">
+            <button class="btn" type="button" id="btnSeePopup"><i class="glyphicon glyphicon-remove"></i>Check Popup</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        var count = 1;
+        var url = "newpopup.html";
+
+
+
+        $(document).ready(function () {
+
+            $(".add-more").click(function () {
+
+                var table = document.getElementById("taskTable");
+
+                var row = table.insertRow(-1);
+
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+
+                cell1text = "<input type=\"text\" name=\"addmore[]\" id=\"taskInfo" + count + "\" class=\"form-control\" value=\"" + $("[name='addTask']").val() + "\" disabled>";
+                cell2text = "<input type=\"date\" name=\"addmore[]\" id=\"dateInfo" + count + "\" class=\"form-control\" value=\"" + $("#dateText").val() + "\" disabled>";
+                cell3text = "<input type=\"time\" name=\"addmore[]\" id=\"timeInfo" + count + "\" class=\"form-control\" value=\"" + $("#timeText").val() + "\" disabled>";
+                cell4text = "<input type=\"button\" value=\"Edit\" onclick=\"getId(this)\" id=\"btnEditQuery" + count + "\" class=\"btn btn-info edit\">";
+                cell5text = "<input type=\"button\" value=\"Remove\" onclick=\"getId(this)\" id=\"btnRemoveQuery" + count + "\" class=\"btn btn-danger remove\">";
+
+                cell1.innerHTML = cell1text;
+                cell2.innerHTML = cell2text;
+                cell3.innerHTML = cell3text;
+                cell4.innerHTML = cell4text;
+                cell5.innerHTML = cell5text;
+
+                document.getElementById("taskText").value = "";
+                document.getElementById("dateText").value = "";
+                document.getElementById("timeText").value = "";
+                
+                count = count + 1;
+            });
+
+            $("body").on("click", ".remove", function () {
+
+                document.getElementById("taskTable").deleteRow(this.parentNode.parentNode.rowIndex);
+                count = count - 1;
+            });
+
+            $("body").on("click", ".edit", function () {
+
+                var rowNum = this.parentNode.parentNode.rowIndex;                
+
+                document.getElementById("taskInfo"+rowNum).disabled = false;
+                document.getElementById("dateInfo"+rowNum).disabled = false;
+                document.getElementById("timeInfo" + rowNum).disabled = false;
+
+                setMinDate("dateInfo"+rowNum);
+
+                document.getElementById("btnEditQuery"+rowNum).value = "Save";
+                document.getElementById("btnEditQuery"+rowNum).className = "btn btn-success save";
+
+            });
+            $("body").on("click", ".save", function () {
+
+                var rowNum = this.parentNode.parentNode.rowIndex;               
+
+                document.getElementById("taskInfo"+rowNum).disabled = true;
+                document.getElementById("dateInfo"+rowNum).disabled = true;
+                document.getElementById("timeInfo"+rowNum).disabled = true;
+
+                document.getElementById("btnEditQuery"+rowNum).value = "Edit";
+                document.getElementById("btnEditQuery"+rowNum).className = "btn btn-info edit";
+            });
+            $("#btnSeePopup").bind("click", function () {
+                window.location.href = url;
+            });
+
+            $("#dateText").click(function () {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var yyyy = today.getFullYear();
+
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+
+                today = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("dateText").setAttribute("min", today);
+            });
+
+            function setMinDate(id) {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+
+                today = yyyy + '-' + mm + '-' + dd;
+                document.getElementById(id).setAttribute("min", today);
+            }
+        });
+
+    </script>
+
+</body>
+</html>

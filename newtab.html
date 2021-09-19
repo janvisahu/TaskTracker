@@ -50,14 +50,14 @@
         var count = 0;
         var url = "newpopup.html";
 
-        
+
 
         $(document).ready(function () {
 
             $(".add-more").click(function () {
                 var text = $("[name='addTask']").val() + " " + $("#dateText").val() + " " + $("#timeText").val();
-                
-                var html = $(".copy").html();                
+
+                var html = $(".copy").html();
                 $(".after-add-more").after(html);
 
                 document.getElementById("taskInfo").value = text;
