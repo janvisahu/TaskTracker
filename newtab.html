@@ -3,79 +3,83 @@
   <title> Task Manager extension </title>  
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="newtabcss.css">
 </head>  
 <body>
 
     <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading"> Add Tasks and Deadlines </div>
+        <div class="panel-heading"> Add Tasks and Deadlines </div>
             <div class="panel-body">
 
-                <form action="action.php">
 
-                    <div class="input-group control-group after-add-more">
+                    <div class="inputfield">
                         <input type="text" id="taskText" name="addTask" class="form-control" placeholder="Enter Task Here">
                         <input type="date" id="dateText" name="deadline" min='2021-09-09'>
                         <input type="time" id="timeText" name="deadlineTime">
-                        <div class="input-group-btn">
-                            <button class="btn btn-success add-more" type="button" id="btnSendQuery"><i class="glyphicon glyphicon-plus"></i> Add</button>
-                        </div>
-                    </div>
-
-                </form>
-
-                <!-- Copy Fields -->
-                <div class="copy hide">
-                    <div class="control-group input-group" style="margin-top:10px">
-                        <input type="text" name="addmore[]" id="taskInfo" class="form-control" placeholder="Enter Task Here">
                         
-                        <div class="input-group-btn">
-                            <button class="btn btn-danger remove" type="button" id="btnRemoveQuery"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                        </div>
+                            <button class="btn btn-success" type="button" id="btnSendQuery"><i class="glyphicon glyphicon-plus"></i> Add</button>
                     </div>
-                </div>
-
-            </div>
+                <ul class="todoList">
+                    <!-- data are comes from local storage -->
+                </ul>                          
+            
         </div>
-    </div>
-
-    <div class="container">
-        <div class="control-group input-group" style="margin-top:10px">
-            <button class="btn" type="button" id="btnSeePopup"><i class="glyphicon glyphicon-remove"></i> Check Popup</button>
-        </div>                        
-    </div>
+    </div>  
 
     <script type="text/javascript">
 
         var count = 0;
         var url = "newpopup.html";
-
-
-
-        $(document).ready(function () {
-
-            $(".add-more").click(function () {
-                var text = $("[name='addTask']").val() + " " + $("#dateText").val() + " " + $("#timeText").val();
-
-                var html = $(".copy").html();
-                $(".after-add-more").after(html);
-
-                document.getElementById("taskInfo").value = text;
+      
+        const addBtn = document.querySelector(".inputfield button");
+        const todoList = document.querySelector(".todoList");
+        function showTasks(){
+            let getLocalStorageData = localStorage.getItem("New Todo");
+           if(getLocalStorageData == null){             
+                listArray = [];
+           }else{
+                listArray = JSON.parse(getLocalStorageData); 
+                }
+           let newLiTag = "";
+           listArray.forEach((element, index) => {
+            newLiTag += `<li>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
+               });
+           todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
+  
                 document.getElementById("taskText").value = "";
                 document.getElementById("dateText").value = "";
                 document.getElementById("timeText").value = "";
+        }        
+            showTasks();
 
-                count = count + 1;
-                url = url + "?" + count + "=" + text;
-            });
+            addBtn.onclick = ()=> {
+                var text = $("[name='addTask']").val() + " " + $("#dateText").val() + " " + $("#timeText").val();
+                let getLocalStorageData = localStorage.getItem("New Todo"); //getting localstorage
+                if(getLocalStorageData == null){ //if localstorage has no data
+                    listArray = []; //create a blank array
+                }else{
+                    listArray = JSON.parse(getLocalStorageData);  //transforming json string into a js object
+                    }
+                listArray.push(text); //pushing or adding new value in array
+                localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
+               
+                showTasks(); //calling showTask function           
+                                           
+                }
+ //once task added leave the input field blank
+// delete task function
+function deleteTask(index){
+  let getLocalStorageData = localStorage.getItem("New Todo");
+  listArray = JSON.parse(getLocalStorageData);
+  listArray.splice(index, 1); //delete or remove the li
+  localStorage.setItem("New Todo", JSON.stringify(listArray));
+  showTasks(); //call the showTasks function
+}
 
-            $("body").on("click", ".remove", function () {
-                $(this).parents(".control-group").remove();
-                count = count - 1;
-            });
-            $("#btnSeePopup").bind("click", function () {
-                window.location.href = url;
-            });
+            // $("#btnSeePopup").bind("click", function () {
+            //     window.location.href = url;
+            // });
 
             $("#dateText").click(function () {
                 var today = new Date();
@@ -94,7 +98,7 @@
                 today = yyyy + '-' + mm + '-' + dd;
                 document.getElementById("dateText").setAttribute("min", today);
             });
-        });
+       
 
     </script>
 

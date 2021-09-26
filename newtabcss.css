@@ -6,3 +6,35 @@ table, th, td {
 th, td {
     background-color: #96D4D4;
 }
+.panel-heading
+{
+    border: 1px solid white;
+    background-color: #96D4D4;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: medium;
+    
+}
+.panel-body
+{
+    background-color:oldlace;
+}
+ul{ margin-left: 20cm;
+    padding-left: 10cm;
+    text-align: left;
+list-style-type: none;
+margin: 0;
+padding: 0;}
+
+.todoList li{
+    position: relative;
+    list-style: none;
+    height: 45px;
+    line-height: 45px;
+    margin-bottom: 8px;
+    background: #f2f2f2;
+    border-radius: 3px;
+    padding: 0 15px;
+    cursor: default;
+    overflow: hidden;
+  }
