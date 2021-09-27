@@ -43,7 +43,7 @@
                 }
            let newLiTag = "";
            listArray.forEach((element, index) => {
-            newLiTag += `<li><button class="check" onclick="checktext(${index})"><i class="glyphicon glyphicon-ok"></i></button>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
+            newLiTag += `<li>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
                });
            todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
   
@@ -76,22 +76,8 @@ function deleteTask(index){
   localStorage.setItem("New Todo", JSON.stringify(listArray));
   showTasks(); //call the showTasks function
 }
-function checktext(i)
-{    
-    let getLocalStorageData = localStorage.getItem("New Todo"); 
-    listArray = JSON.parse(getLocalStorageData);       
-    let newLiTag = "";
-           listArray.forEach((element, index) => {
-            if(i!=index){
-            newLiTag += `<li><button class="check" onclick="checktext(${index})"><i class="glyphicon glyphicon-ok"></i></button>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
-              }
-            else{
-                newLiTag += `<li><button class="check"><i class="glyphicon glyphicon-ok"></i></button><strike>${element}</strike><button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
-            }
-           });
-           todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
-           
-}            // $("#btnSeePopup").bind("click", function () {
+
+            // $("#btnSeePopup").bind("click", function () {
             //     window.location.href = url;
             // });
 
