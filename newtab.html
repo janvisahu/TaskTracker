@@ -43,7 +43,7 @@
                 }
            let newLiTag = "";
            listArray.forEach((element, index) => {
-            newLiTag += `<li>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
+            newLiTag += `<li><button class="btn" onclick="checkTask(${index}); this.disabled=true";><i class="glyphicon glyphicon-ok"></i></button>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
                });
            todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
   
@@ -75,8 +75,23 @@ function deleteTask(index){
   listArray.splice(index, 1); //delete or remove the li
   localStorage.setItem("New Todo", JSON.stringify(listArray));
   showTasks(); //call the showTasks function
+}   
+function checkTask(i)
+{
+    let getLocalStorageData = localStorage.getItem("New Todo");
+  listArray = JSON.parse(getLocalStorageData);
+  var text=listArray[i];
+  listArray[i]=strikeThrough(text)
+            localStorage.setItem("New Todo", JSON.stringify(listArray));
+          showTasks();  
+  
 }
-
+function strikeThrough(text) {
+  return text
+    .split('')
+    .map(char => char + '\u0336')
+    .join('')
+}
             // $("#btnSeePopup").bind("click", function () {
             //     window.location.href = url;
             // });
