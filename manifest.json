@@ -16,5 +16,7 @@
     "storage",
     "notifications",
     "alarms"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-inline' http://ajax.googleapis.com ; object-src 'self' ; script-src-elem 'self' http://ajax.googleapis.com/"
+
 }

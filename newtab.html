@@ -1,10 +1,10 @@
-<html lang="en">  
-<head>  
-  <title> Task Manager extension </title>  
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="newtabcss.css">
+<html nonce="r@nd0m" lang="en">  
+<head>
+    <title> Task Manager Extension </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="newtabcss.css">
 </head>  
 <body>
 
@@ -17,8 +17,7 @@
                         <input type="text" id="taskText" name="addTask" class="form-control" placeholder="Enter Task Here">
                         <input type="date" id="dateText" name="deadline" min='2021-09-09'>
                         <input type="time" id="timeText" name="deadlineTime">
-                        
-                            <button class="btn btn-success" type="button" id="btnSendQuery"><i class="glyphicon glyphicon-plus"></i> Add</button>
+                        <button class="btn btn-success" type="button" id="btnSendQuery"><i class="glyphicon glyphicon-plus"></i> Add</button>
                     </div>
                 <ul class="todoList">
                     <!-- data are comes from local storage -->
@@ -27,95 +26,7 @@
         </div>
     </div>  
 
-    <script type="text/javascript">
-
-        var count = 0;
-        var url = "newpopup.html";
-      
-        const addBtn = document.querySelector(".inputfield button");
-        const todoList = document.querySelector(".todoList");
-        function showTasks(){
-            let getLocalStorageData = localStorage.getItem("New Todo");
-           if(getLocalStorageData == null){             
-                listArray = [];
-           }else{
-                listArray = JSON.parse(getLocalStorageData); 
-                }
-           let newLiTag = "";
-           listArray.forEach((element, index) => {
-            newLiTag += `<li><button class="btn" onclick="checkTask(${index}); this.disabled=true";><i class="glyphicon glyphicon-ok"></i></button>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
-               });
-           todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
-  
-                document.getElementById("taskText").value = "";
-                document.getElementById("dateText").value = "";
-                document.getElementById("timeText").value = "";
-        }        
-            showTasks();
-
-            addBtn.onclick = ()=> {
-                var text = $("[name='addTask']").val() + " " + $("#dateText").val() + " " + $("#timeText").val();
-                let getLocalStorageData = localStorage.getItem("New Todo"); //getting localstorage
-                if(getLocalStorageData == null){ //if localstorage has no data
-                    listArray = []; //create a blank array
-                }else{
-                    listArray = JSON.parse(getLocalStorageData);  //transforming json string into a js object
-                    }
-                listArray.push(text); //pushing or adding new value in array
-                localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
-               
-                showTasks(); //calling showTask function           
-                                           
-                }
- //once task added leave the input field blank
-// delete task function
-function deleteTask(index){
-  let getLocalStorageData = localStorage.getItem("New Todo");
-  listArray = JSON.parse(getLocalStorageData);
-  listArray.splice(index, 1); //delete or remove the li
-  localStorage.setItem("New Todo", JSON.stringify(listArray));
-  showTasks(); //call the showTasks function
-}   
-function checkTask(i)
-{
-    let getLocalStorageData = localStorage.getItem("New Todo");
-  listArray = JSON.parse(getLocalStorageData);
-  var text=listArray[i];
-  listArray[i]=strikeThrough(text)
-            localStorage.setItem("New Todo", JSON.stringify(listArray));
-          showTasks();  
-  
-}
-function strikeThrough(text) {
-  return text
-    .split('')
-    .map(char => char + '\u0336')
-    .join('')
-}
-            // $("#btnSeePopup").bind("click", function () {
-            //     window.location.href = url;
-            // });
-
-            $("#dateText").click(function () {
-                var today = new Date();
-                var dd = today.getDate();
-                var mm = today.getMonth() + 1; //January is 0!
-                var yyyy = today.getFullYear();
-
-                if (dd < 10) {
-                    dd = '0' + dd;
-                }
-
-                if (mm < 10) {
-                    mm = '0' + mm;
-                }
-
-                today = yyyy + '-' + mm + '-' + dd;
-                document.getElementById("dateText").setAttribute("min", today);
-            });
-       
-
-    </script>
+    <script src="thescript.js" type="text/javascript"></script>
 
 </body>  
 </html>  
