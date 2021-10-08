@@ -20,7 +20,7 @@ todoForm.addEventListener('submit', function(event) {
 // function to add todo
 function addTodo(item, date, time) {
   // if item is not empty
-  if (item !== '' && date!=='' && time!=='') {
+  if (item !== '' ) {
     // make a todo object, which has id, name, and completed properties
 
     const todo = {

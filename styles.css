@@ -10,7 +10,8 @@ body {
     display: flex;
     justify-content: center;
     background: linear-gradient(#3299a8, #297d8a);
-    font-family: sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
 }
 
 button:hover {
@@ -37,7 +38,8 @@ button:hover {
   h1 {
     color: #fff;
     font-size: 3rem;
-  }
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    }
   
   /* todo-form */
   
@@ -52,6 +54,7 @@ button:hover {
     border-radius: 5px;
     padding: 10px;
     font-size: 1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     margin-left: 0px;
   }
 
