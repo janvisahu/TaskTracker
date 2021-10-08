@@ -3,20 +3,21 @@
     padding: 0;
     margin: 0;
   }
-  
-  body {
+
+body {
     width: 100vw;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    background: linear-gradient(#F00000, #DC281E);
+    background: linear-gradient(#3299a8, #297d8a);
     font-family: sans-serif;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     cursor: pointer;
-    background-color: #73E831;
-  }
+    background-color: #3ab538;
+    color: #FFF;
+}
   
   ul {
     list-style-type: none; /* get rid of bullet points on side of list items */
@@ -45,17 +46,25 @@
   }
   
   .todo-input {
-    width: 250px;
+    width: 275px;
     border: none;
     outline: none;
     border-radius: 5px;
     padding: 10px;
     font-size: 1rem;
-    margin-left: 25px;
+    margin-left: 0px;
   }
 
-  .todo-date, .todo-time {
-    width: 150px;
+  .todo-date {
+    width: 160px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+.todo-time {
+    width: 90px;
     border: none;
     outline: none;
     border-radius: 5px;
@@ -64,14 +73,16 @@
 }
 
 .add-button {
-    background-color: #0000ff;
-    color: #fff;
+    background-color: #f5f2eb;
+    color: #3299a8;
     border: none;
     outline: none;
+    width: 295px;
     border-radius: 5px;
     padding: 7px;
     font-size: 1.2rem;
-    margin-right: 100px;
+    margin-top: 10px;
+    margin-left: 0px;
 }
 
 .todo-row {
