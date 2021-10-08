@@ -1,6 +1,9 @@
 const todoForm = document.querySelector('.todo-form');
 // select the input box
 const todoInput = document.querySelector('.todo-input');
+const dateInput = document.querySelector('.todo-date');
+const timeInput = document.querySelector('.todo-time');
+const dateBtn = document.getElementById("dateText");
 // select the <ul> with class="todo-items"
 const todoItemsList = document.querySelector('.todo-items');
 
@@ -11,17 +14,19 @@ let todos = [];
 todoForm.addEventListener('submit', function(event) {
   // prevent the page from reloading when submitting the form
   event.preventDefault();
-  addTodo(todoInput.value); // call addTodo function with input box current value
+    addTodo(todoInput.value, dateInput.value, timeInput.value); // call addTodo function with input box current value
 });
 
 // function to add todo
-function addTodo(item) {
+function addTodo(item, date, time) {
   // if item is not empty
-  if (item !== '') {
+  if (item !== '' && date!=='' && time!=='') {
     // make a todo object, which has id, name, and completed properties
+
     const todo = {
       id: Date.now(),
-      name: item,
+        name: item,
+        value: date + " " + time,
       completed: false
     };
 
@@ -30,7 +35,9 @@ function addTodo(item) {
     addToLocalStorage(todos); // then store it in localStorage
 
     // finally clear the input box value
-    todoInput.value = '';
+      todoInput.value = '';
+      dateInput.value = '';
+      timeInput.value = '';
   }
 }
 
@@ -64,6 +71,7 @@ function renderTodos(todos) {
     li.innerHTML = `
       <input type="checkbox" class="checkbox" ${checked}>
       ${item.name}
+      ${item.value}
       <button class="delete-button">X</button>
     `;
     // finally add the <li> to the <ul>
@@ -133,3 +141,21 @@ todoItemsList.addEventListener('click', function(event) {
     deleteTodo(event.target.parentElement.getAttribute('data-key'));
   }
 });
+
+dateBtn.onclick = () => {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("dateText").setAttribute("min", today);
+};

@@ -14,7 +14,8 @@ function showTasks() {
     }
     let newLiTag = "";
     listArray.forEach((element, index) => {
-        newLiTag += `<li><button class="btn" onclick="checkTask(${index}); this.disabled=true";><i class="glyphicon glyphicon-ok"></i></button>${element}<button class="btn" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
+        var checkId = "checkTask" + index;
+        newLiTag += `<li><button class="btn" id=${checkId} value=${index}; this.disabled=true";><i class="glyphicon glyphicon-ok"></i></button>${element}<button class="btn" id="checkTask" onclick="deleteTask(${index})"><i class="glyphicon glyphicon-trash"></i></button></li>`
     });
     todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
 
@@ -39,6 +40,7 @@ addBtn.onclick = () => {
 //once task added leave the input field blank
 // delete task function
 function deleteTask(index) {
+    document.getElementById("testLabel").value = "Meh";
     let getLocalStorageData = localStorage.getItem("New Todo");
     listArray = JSON.parse(getLocalStorageData);
     listArray.splice(index, 1); //delete or remove the li
@@ -52,8 +54,19 @@ function checkTask(i) {
     listArray[i] = strikeThrough(text)
     localStorage.setItem("New Todo", JSON.stringify(listArray));
     showTasks();
-
 }
+
+document.addEventListener('click', function () {
+    var link = document.getElementById('checkTask');
+    var ind = document.getElementById('checkTask').value;
+    // onClick's logic below:
+    getElementById(testLabel).value = ind;
+    link.addEventListener('click', function () {
+        document.getElementById("testLabel").value = "CHECK";
+        checkTask(ind);
+    });
+});
+
 function strikeThrough(text) {
     return text
         .split('')

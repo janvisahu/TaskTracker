@@ -50,11 +50,20 @@
     outline: none;
     border-radius: 5px;
     padding: 10px;
-    margin-right: 10px;
     font-size: 1rem;
+    margin-left: 25px;
   }
-  
-  .add-button {
+
+  .todo-date, .todo-time {
+    width: 150px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.add-button {
     background-color: #0000ff;
     color: #fff;
     border: none;
@@ -62,7 +71,14 @@
     border-radius: 5px;
     padding: 7px;
     font-size: 1.2rem;
-  }
+    margin-right: 100px;
+}
+
+.todo-row {
+    margin-top: 5px;
+}
+  
+
   
   /* todo-form style ends */
   
@@ -110,6 +126,8 @@
   .checked { 
     text-decoration: line-through;
   }
+
+
   
   /* todo-items style ends */
   

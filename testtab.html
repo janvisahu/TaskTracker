@@ -12,8 +12,16 @@
     <h1>Todo</h1>
 
     <form class="todo-form">
-      <input type="text" class="todo-input" placeholder="Add a Todo...">
-      <button type="submit" class="add-button">Add</button>
+        <div class="todo-row">
+                <input type="text" class="todo-input" placeholder="Add a Todo...">
+        </div>
+        <div class="todo-row">
+                <input type="date" class="todo-date" id="dateText" name="deadline" min='2021-09-09'>
+                <input type="time" class="todo-time" id="timeText" name="deadlineTime">
+        </div class="todo-row">
+        <div >
+                <button type="submit" class="add-button">Add</button>
+        </div>
     </form>
 
     <ul class="todo-items">
